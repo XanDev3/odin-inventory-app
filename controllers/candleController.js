@@ -32,7 +32,7 @@ const upload = multer({
     callback(null, true)
   },
   limits:{
-    fileSize: 800/* 0000 */
+    fileSize: 8000000
   }, 
 }).single('image');
 
