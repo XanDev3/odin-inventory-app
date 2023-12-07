@@ -11,6 +11,8 @@ const { body, validationResult } = require("express-validator");
 // for file uploads
 const multer = require('multer');
 const path = require("path")
+// enable debug module logging
+const debug = require("debug")("multer")
 const storage = multer.diskStorage({ //multers disk storage settings
   destination: function (req, file, cb) {
     cb(null, 'public/images')
@@ -30,7 +32,7 @@ const upload = multer({
     callback(null, true)
   },
   limits:{
-    fileSize: 8000000
+    fileSize: 800/* 0000 */
   }, 
 }).single('image');
 
@@ -118,9 +120,9 @@ exports.candle_create_post = [
       upload(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
           // A Multer error occurred when uploading.
-          console.log('MulterError', err)
+          debug('error on create Post, MulterError', err.message)
         } else if (err) {
-          console.log('UnhandledError', err)
+          debug('error on create Post, UnhandledError', err.message)
         }
         if (err) {
           // Create a candle object with escaped and trimmed data.
@@ -335,9 +337,9 @@ exports.candle_update_post = [
       upload(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
           // A Multer error occurred when uploading.
-          console.log('MulterError', err)
+          debug('upload error on update, MulterError:', err)
         } else if (err) {
-          console.log('UnhandledError', err)
+          debug('upload error on update, UnhandledError', err)
         }
         if (err) {
           // Create a candle object with escaped and trimmed data.

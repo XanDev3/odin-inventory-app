@@ -1,5 +1,6 @@
 const Color = require("../models/color")
 const Candle = require("../models/candle")
+const debug = require("debug")("color")
 
 // npm install express-async-handler  
 // to get asyncHandler in order to catch exceptions in routers
@@ -28,6 +29,7 @@ exports.color_detail = asyncHandler(async (req, res, next) => {
 
   if (color === null) {
     // No results.
+    debug(`id not found on detail GET: ${req.params.id}`)
     const err = new Error("Color not found");
     err.status = 404;
     return next(err);
