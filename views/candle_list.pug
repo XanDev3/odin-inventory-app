@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each candle in candle_list 
+        li
+            a(href=candle.url) #{candle.name} 
+            img(class="list-image" src=`/images/${candle.image}` alt="")
+            
+    else
+      li There are no candles

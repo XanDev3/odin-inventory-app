@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1 #{title}: #{scent.name}
+
+  if scent_candles.length
+
+    p <em>#[strong Delete the following candles before attempting to delete this scent.]</em>
+
+    div(style='margin-left:20px;margin-top:20px;')
+
+      h4 Candles
+
+      dl
+      each candle in scent_candles
+        dt
+          a(style="font-size:16px",href=candle.url) #{candle.name}
+        dd(style="margin-top:4px;") Description: #{candle.description} 
+        |# Available: #{candle.number_in_stock}
+        hr
+  else
+    p Do you really want to delete this Scent?
+
+    form(method='POST' action='')
+      div.form-group
+        input#scentid.form-control(type='hidden',name='scentid', required='true', value=scent._id )
+        
+    button.btn.btn-primary(type='button' data-toggle="modal" data-target="#pwModal" ) Delete
+      //- button.btn.btn-primary(type='submit') Delete
+      div#pwModal(class='modal fade')
+        div.modal-dialog(role="document")
+          div.modal-content
+            div.modal-body
+              div.form-group
+                label(for='password') Password for Delete
+                input.form-control(type='password' id='password' placeholder='password' name='password')
+              button.btn.btn-secondary(type='close') Close 
+              button.btn.btn-primary(type='submit') Confirm 
+    if error
+      ul
+        li Could not delete. #{error}!

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Color: #{color.name}
+
+  p <strong>Description: </strong> <span style="color: #{color.name}">#{color.description}</span>
+  
+  hr
+  p 
+    a(class='button btn btn-primary' href=color.url+'/update') Update Color
+  p 
+    a(class='button btn btn-secondary' href=color.url+'/delete') Delete Color

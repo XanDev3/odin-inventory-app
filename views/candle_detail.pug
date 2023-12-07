@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Candle: #{candle.name}
+
+  img(class="img-fluid detail-image" src=`/images/${candle.image}` alt="Product Image")
+  p <strong>Description: </strong> #{candle.description}
+  p <strong># Available: </strong> #{candle.number_in_stock}
+  p <strong>Colors: </strong>
+    each val, index in candle.color
+        a(href=val.url) #{val.name}
+        if index < candle.color.length - 1
+            |, 
+  p <strong>Scents: </strong>
+    each val, index in candle.scent
+            a(href=val.url) #{val.name}
+            if index < candle.scent.length - 1
+                | , 
+  hr
+  p 
+    a(class='button btn btn-primary' href=candle.url+'/update') Update Candle
+  p 
+    a(class='button btn btn-secondary' href=candle.url+'/delete') Delete Candle

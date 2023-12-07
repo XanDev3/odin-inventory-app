@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Scent: #{scent.name}
+
+  p <strong>Description: </strong> <em>#{scent.description}</em>
+
+  hr
+  p 
+    a(class='button btn btn-primary' href=scent.url+'/update') Update Scent
+  p
+    a(class='button btn btn-secondary' href=scent.url+'/delete') Delete Scent

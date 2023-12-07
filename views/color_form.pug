@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+  h1 #{title}
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='name', class='font-weight-bold') Name:
+      input#name.form-control(class='col-sm-6', type='text', placeholder='Orange, Green etc.' name='name' required='true' value=(undefined===color ? '' : color.name) )
+      br
+      label(for='description', class='font-weight-bold') Description:
+      input#description.form-control(class='col-sm-6', type='text', placeholder='This color looks absolutely fire, etc.' name='description' required='true' value=(undefined===color ? '' : color.description) )
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

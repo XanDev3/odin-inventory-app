@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  h1 #{title}: <span style="color: #{color.name}">#{color.name}<span>
+
+  if color_candles.length
+
+    p #[strong Delete the following candles before attempting to delete this color.]
+
+    div(style='margin-left:20px;margin-top:20px;')
+
+      h4 Candles
+
+      dl
+      each candle in color_candles
+        dt
+          a(style="font-size:16px",href=candle.url) #{candle.name}
+        dd(style="margin-top:4px;") Description: #{candle.description} 
+        |# Available: #{candle.number_in_stock}
+        hr
+  else
+    p Do you really want to delete this Color?
+
+    form(method='POST' action='')
+      div.form-group
+        input#colorid.form-control(type='hidden',name='colorid', required='true', value=color._id )
+
+      button.btn.btn-primary(type='button' data-toggle="modal" data-target="#pwModal") Delete
+      //- button.btn.btn-primary(type='submit') Delete
+      div#pwModal(class='modal fade')
+        div.modal-dialog(role="document")
+          div.modal-content
+            div.modal-body
+              div.form-group
+                label(for='password') Password for Delete
+                input.form-control(type='password' id='password' placeholder='password' name='password')
+              button.btn.btn-secondary(type='close') Close 
+              button.btn.btn-primary(type='submit') Confirm 
+    if error
+      ul
+        li Could not delete. #{error}!

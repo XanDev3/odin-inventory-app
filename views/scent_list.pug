@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each scent in scent_list 
+        li
+            a(href=scent.url) #{scent.name} 
+            | #{scent.description}
+            
+    else
+      li There are no scents

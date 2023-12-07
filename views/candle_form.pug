@@ -1,0 +1,42 @@
+extends layout
+
+block content
+
+  h1 #{title}
+
+  form(method='POST' action='' enctype="multipart/form-data")
+    div.form-group
+      label(for='name', class='font-weight-bold') Name:
+      input#name.form-control(class='col-sm-6', type='text', placeholder='Sweet Candy, Tart Cherry, etc.' name='name' required='true' value=(undefined===candle ? '' : candle.name) )
+      br
+      label(for='description', class='font-weight-bold') Description:
+      input#name.form-control(class='col-sm-6', type='text', placeholder='Warm, toasty feeling of a campfire.' name='description' required='true' value=(undefined===candle ? '' : candle.description) )
+      br
+      label(for='num_in_stock', class='font-weight-bold') Number in Stock:
+      input#name.form-control(class='col-sm-6', type='text', placeholder='1, 2, 3, etc.' name='num_in_stock' required='true' value=(undefined===candle ? '' : candle.number_in_stock) )
+      br
+      label(for='image', class='font-weight-bold') Image:
+      input#image(class="form-control-file" type='file' name='image')
+      | (Must be less than 8MB)
+      if muErr
+        h2!= muErr
+      br
+      br
+      label(class='font-weight-bold') Colors:
+      div
+        for color in colors
+          div(style='display: inline; padding-right:10px; ')
+            input.checkbox-input(class='mr-1', type='checkbox', name='color', id=color._id, value=color._id, checked=color.checked )
+            label(for=color._id) #{color.name}
+      label(class='font-weight-bold') Scents:
+      div
+        for scent in scents
+          div(style='display: inline; padding-right:10px;')
+            input.checkbox-input(class='mr-1', type='checkbox', name='scent', id=scent._id, value=scent._id, checked=scent.checked )
+            label(for=scent._id) #{scent.name}
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
