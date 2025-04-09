@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// Require controller modules.
+// Required controller modules.
 const candle_controller = require("../controllers/candleController.js");
 const color_controller = require("../controllers/colorController.js");
 const scent_controller = require("../controllers/scentController.js");
